@@ -1,30 +1,45 @@
 package calculadora;
 
 public class Calculadora {
+    
 
-    public int r = 0;
+    public int calcular(int primeiroNumero, int segundoNumero, String operador) {
 
-    public int calc(int a, int b, String op) {
+        switch (operador) {
 
-        // calculadora
-        if(op.equals("+")) {
-            r = a + b;
-        } else if (op.equals("-")) {
-            r = a - b;
-        } else if (op.equals("*")) {
-            r = a * b;
-        } else if (op.equals("/")) {
-            if (b != 0) {
-                r = a / b;
-            } else {
-                System.out.println("Erro: divisão por zero, operação irregular");
-                r = 0;
-            }
-        } else {
-            System.out.println("Operação inválida");
-            r = 0;
+            case "+":
+                return primeiroNumero + segundoNumero;
+
+            case "-":
+                return primeiroNumero - segundoNumero;
+
+            case "*":
+                return primeiroNumero * segundoNumero;
+
+            case "/":
+                return dividir(primeiroNumero, segundoNumero);
+
+            default:
+                throw new IllegalArgumentException(
+                    "Operador inválido!"
+                );
         }
-        System.out.println("Resultado = " + r);
-        return r;
+    }
+
+    private int dividir(int dividendo, int divisor) {
+        if (divisor == 0) {
+            throw new ArithmeticException(
+                "Não é possível dividir por zero!"
+            );
+        }
+        return dividendo / divisor;
+    }
+
+    public void exibirResultado(int resultado) {
+        System.out.println("Resultado: " + resultado);
+    }
+
+    public void exibirErro(String mensagem) {
+        System.out.println("Erro: " + mensagem);
     }
 }
